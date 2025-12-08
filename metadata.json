@@ -1,5 +1,25 @@
 {
-  "name": "Free Online Games 2025（5）",
-  "description": "A premium dark-themed gaming portal featuring the best free online games of 2025 with instant play functionality.",
-  "requestFramePermissions": []
+  "name": "PlayZero 2025(5)",
+  "short_name": "PlayZero",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "description": "Play 100% Free Online Games. Racing, Puzzle, Action. No downloads.",
+  "icons": [
+    {
+      "src": "https://picsum.photos/192/192",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://picsum.photos/512/512",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "requestFramePermissions": [
+    "microphone",
+    "camera"
+  ]
 }
