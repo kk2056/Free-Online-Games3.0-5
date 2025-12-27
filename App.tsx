@@ -280,18 +280,15 @@ const AdBanner: React.FC<{ slot: string; format?: string; className?: string }> 
   }, [slot]);
 
   return (
-    <div className={`w-full flex justify-center items-center my-4 overflow-hidden bg-brand-800/10 rounded-lg border border-brand-700/20 ${className}`}>
-      <div className="text-center w-full min-h-[90px] flex flex-col items-center justify-center py-2">
-        <span className="text-[9px] text-gray-700 uppercase tracking-widest mb-1 block">Advertisement</span>
-        <ins
-          className="adsbygoogle block"
-          style={{ display: 'block', width: '100%', minHeight: '90px' }}
-          data-ad-client="ca-pub-9774042341049510"
-          data-ad-slot={slot}
-          data-ad-format={format}
-          data-full-width-responsive="true"
-        />
-      </div>
+    <div className={`w-full flex justify-center items-center overflow-hidden ${className}`}>
+      <ins
+        className="adsbygoogle block"
+        style={{ display: 'block', width: '100%', minHeight: '90px' }}
+        data-ad-client="ca-pub-9774042341049510"
+        data-ad-slot={slot}
+        data-ad-format={format}
+        data-full-width-responsive="true"
+      />
     </div>
   );
 };
@@ -443,24 +440,24 @@ const GamePlayerPage: React.FC = () => {
         <div className="lg:col-span-2">
           
           {/* AdSense SLOT 1 (ABOVE GAME) */}
-          <AdBanner slot="7788990011" format="horizontal" className="mb-4" />
+          <div className="ad-top mt-4 text-center">
+            <AdBanner slot="7788990011" format="auto" />
+          </div>
 
           {/* FULL SCREEN BUTTON */}
           <button 
             onClick={() => document.documentElement.requestFullscreen()} 
-            className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg mb-4 flex items-center justify-center gap-2 transition-transform active:scale-95 shadow-lg"
+            className="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg mb-4 block mx-auto text-lg shadow-xl active:scale-95 transition-all"
           >
-            <Maximize2 className="w-5 h-5" />
-            Go Full Screen (Press F)
+            Go Full Screen (Press F for best experience)
           </button>
 
           {/* FULL SCREEN TIP TEXT */}
-          <div className="text-center text-white bg-blue-800 p-3 rounded-lg mb-6 flex items-center justify-center gap-2 font-medium border border-blue-600/30">
-            <Info className="w-5 h-5 flex-shrink-0" />
-            Press F for the best fullscreen experience on Chromebook!
+          <div className="text-center text-white bg-blue-800 p-3 rounded-lg mb-6 max-w-md mx-auto border border-blue-600/30">
+            Press F for fullscreen - Perfect for long play on Chromebook! No lag, full immersion.
           </div>
 
-          {/* GAME IFRAME */}
+          {/* GAME IFRAME CONTAINER */}
           <div className="bg-black rounded-xl overflow-hidden shadow-2xl border border-brand-700 relative aspect-video ring-1 ring-white/10">
             {isLoading && (
               <div className="absolute inset-0 flex flex-col items-center justify-center bg-brand-900 z-10">
@@ -480,9 +477,11 @@ const GamePlayerPage: React.FC = () => {
           </div>
 
           {/* AdSense SLOT 2 (BELOW GAME) */}
-          <AdBanner slot="2233445566" format="horizontal" className="mt-6" />
+          <div className="ad-bottom mt-8 text-center">
+            <AdBanner slot="2233445566" format="auto" />
+          </div>
 
-          {/* CONTENT SECTION */}
+          {/* RICH CONTENT SECTION */}
           <div className="mt-10 bg-brand-800 rounded-xl p-8 border border-brand-700">
             <h1 className="text-3xl font-extrabold text-white mb-6 flex items-center"><Gamepad2 className="w-8 h-8 mr-3 text-brand-500"/>About {game.title}</h1>
             <div className="prose prose-invert max-w-none text-gray-300 leading-relaxed">
@@ -500,13 +499,13 @@ const GamePlayerPage: React.FC = () => {
               <p>{game.longContent.why2025}</p>
             </div>
             
-            {/* Strategy Text Block */}
+            {/* Strategy Text Block (SEO Optimized) */}
             <div className="strategy mt-10 text-gray-400 p-6 bg-brand-950/50 rounded-lg border border-brand-700 italic text-sm">
               Looking for a seamless gaming experience? Play Zero Unblocked 2025 is your destination for "Zero Lag, Zero Hassle." We understand that school networks often throttle bandwidth, causing games to stutter. This site features a curated collection of lightweight HTML5 games designed to load instantly. From puzzles to quick action titles, everything here is built for speed.
               Why play here? Every game on this list has been compressed and optimized. If you are tired of loading bars getting stuck at 99%, this is your paradise. It’s perfect for those 5-minute passing periods between classes. You don't need to install any plugins or extensions; simply open your browser and enjoy smooth digital entertainment. This is the top choice for students seeking lightweight fun in 2025.
             </div>
 
-            {/* Inner Links Code Section */}
+            {/* Inner Links Section (SEO Internal Links) */}
             <div className="other-games mt-10 bg-brand-950 p-8 rounded-lg border border-brand-700">
               <h3 className="text-xl font-bold text-white mb-6 border-b border-brand-700 pb-2">More Unblocked Games 2025</h3>
               <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
@@ -525,12 +524,12 @@ const GamePlayerPage: React.FC = () => {
           </div>
         </div>
 
-        {/* SIDEBAR */}
+        {/* SIDEBAR RECOMMENDED */}
         <div className="space-y-6">
           <div className="bg-brand-800 rounded-xl p-5 border border-brand-700 shadow-lg sticky top-24">
             <h3 className="font-bold text-white mb-4 uppercase tracking-wider flex items-center"><Star className="w-4 h-4 mr-2 text-yellow-500"/> Recommended</h3>
             <div className="space-y-4">
-              {GAMES.filter(g => g.id !== game.id).slice(0, 6).map(rec => (
+              {GAMES.filter(g => g.id !== game.id).slice(0, 8).map(rec => (
                 <Link key={rec.id} to={`/game/${rec.id}`} className="flex space-x-3 group">
                   <div className="w-20 h-14 bg-brand-900 rounded overflow-hidden flex-shrink-0">
                     <SafeImage src={rec.thumbnail} fallback={rec.fallbackThumbnail} alt={rec.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform" />
@@ -550,14 +549,14 @@ const GamePlayerPage: React.FC = () => {
   );
 };
 
-// --- STATIC PAGES ---
+// --- STATIC PAGES (Simplified for demo) ---
 const PrivacyPage: React.FC = () => (
   <div className="container mx-auto px-4 py-12 max-w-4xl text-gray-300">
     <div className="bg-brand-800 rounded-xl p-10 border border-brand-700">
       <h1 className="text-3xl font-bold mb-8 text-white">Privacy Policy</h1>
-      <p className="mb-6">At PlayZero2025, we take your privacy seriously. This policy describes how we collect and use your data...</p>
-      <h2 className="text-xl font-bold mb-4 text-white">AdSense Policy</h2>
-      <p>We use Google AdSense to serve ads. Google uses cookies to serve ads based on your visit history. You may opt out of personalized advertising by visiting Google Ad Settings.</p>
+      <p className="mb-6">At PlayZero2025, your privacy is paramount. We use Google AdSense to provide high-quality free gaming content. By using our site, you agree to the use of cookies for personalized advertising.</p>
+      <h2 className="text-xl font-bold mb-4 text-white">Cookies and AdSense</h2>
+      <p>Google uses cookies to serve ads based on your prior visits. You may opt out by visiting the Google Ad Settings page.</p>
     </div>
   </div>
 );
@@ -567,7 +566,7 @@ const AboutPage: React.FC = () => (
     <div className="bg-brand-800 rounded-xl p-12 border border-brand-700">
       <Gamepad2 className="w-16 h-16 text-brand-500 mx-auto mb-6"/>
       <h1 className="text-4xl font-bold mb-6 text-white">About PlayZero</h1>
-      <p className="text-xl text-gray-300">We provide zero-lag, high-quality unblocked games for browsers. Our platform is built for speed and accessibility.</p>
+      <p className="text-xl text-gray-300 leading-relaxed">PlayZero is the world's leading destination for unblocked browser games. Since 2025, we have provided millions of students and office workers with high-performance, lag-free gaming experiences that require no downloads.</p>
     </div>
   </div>
 );
@@ -577,8 +576,8 @@ const ContactPage: React.FC = () => (
     <h1 className="text-3xl font-bold mb-8 text-white">Contact Us</h1>
     <div className="bg-brand-800 rounded-xl p-8 border border-brand-700">
       <Mail className="w-12 h-12 text-brand-500 mx-auto mb-6"/>
-      <p className="text-gray-300">Reach out for support or game suggestions. We aim to reply within 48 hours.</p>
-      <button className="mt-8 bg-brand-500 hover:bg-brand-600 text-white font-bold py-3 px-8 rounded-lg w-full transition-colors">Send an Email</button>
+      <p className="text-gray-300 mb-8">Have a game suggestion or feedback? Reach out to our developer team.</p>
+      <button className="bg-brand-500 hover:bg-brand-600 text-white font-bold py-3 px-8 rounded-lg w-full transition-colors shadow-lg shadow-brand-500/20">Send Email</button>
     </div>
   </div>
 );
@@ -586,7 +585,7 @@ const ContactPage: React.FC = () => (
 // --- APP ROOT ---
 function App() {
   return (
-    <div className="bg-brand-950 text-gray-100 font-sans min-h-screen flex flex-col">
+    <div className="bg-brand-950 text-gray-100 font-sans min-h-screen flex flex-col selection:bg-brand-500 selection:text-white">
       <Header />
       <main className="flex-grow">
         <Routes>
